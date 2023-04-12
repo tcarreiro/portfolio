@@ -1,0 +1,104 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #2196f3;
+}
+
+.card
+{
+    position: relative;
+    width: 400px;
+    height: 600px;
+    user-select: none;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 -15px 25px rgba(0,0,0,0.1);
+}
+
+.profileTab
+{
+    width: 400px;
+    height: 300px;
+    user-select: none;
+}
+
+.profileTab ul.about
+{
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.profileTab ul.about li
+{
+    list-style: none;
+}
+
+.profileTab ul.about li h1
+{
+    padding-top: 3em;
+    font-size: 2.5em;
+}
+
+.profileTab ul.about li h2
+{
+    font-size: 1.3em;
+}
+
+.profileTab ul.about li h3
+{
+    padding-top: 1em;
+    font-size: 1.3em;
+}
+
+.networkTab
+{
+    width: 400px;
+    height: 80px;
+    user-select: none;
+}
+
+.networkTab ul.tab 
+{
+    position: relative;
+    inset: 0;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:13%;
+}
+
+.networkTab ul.tab li
+{
+    list-style: none;
+    cursor: pointer;
+}
+
+.networkTab ul.tab li ion-icon
+{
+    font-size: 1.8em;
+    color: #bbb;
+    pointer-events: none;
+    transition: 0.1s;
+}
+
+.networkTab ul.tab li:hover ion-icon
+{
+    color: #2196f3;
+}
