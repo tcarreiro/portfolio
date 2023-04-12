@@ -7,84 +7,134 @@
 
 body
 {
-    display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #2196f3;
+    background: radial-gradient(circle, rgba(33,150,243,1) 0%, rgba(0,234,255,1) 0%, rgba(33,150,243,1) 45%);
+    display: flex;
 }
 
 .card
 {
-    position: relative;
     width: 400px;
     height: 600px;
-    user-select: none;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 -15px 25px rgba(0,0,0,0.1);
+    background: #EEE;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #61b8ff;
+    border-width: 4px;
+    box-shadow: 0px 0px 65px rgba(0,0,0,0.45);
 }
 
 .profileTab
 {
-    width: 400px;
-    height: 300px;
-    user-select: none;
-}
-
-.profileTab ul.about
-{
-    position: relative;
-    background: #fff;
-    border-radius: 10px;
-    display: flex;
+    display: block;
+    min-height: 93%;
     justify-content: center;
     align-items: center;
-    
+    padding: 20px;
+    padding-bottom: 0px;
+
 }
 
-.profileTab ul.about li
+.profilePhoto
+{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.profileText
+{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    padding-left: 15px;
+}
+
+.profileName,
+.profileRole,
+.profileAbout,
+.profileResume
+{
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.profileName
+{
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.profileRole
+{
+    font-size: 1.2em;
+}
+
+.profileImg
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color:  rgba(0,0,0,0.85);
+}
+
+.profileAbout
+{
+    padding-top: 25px;
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.profileResume
+{
+    padding-top: 20px;
+    font-size: 1.05em;
+    text-align: justify;
+}
+/*.profileTab ul.about p
 {
     list-style: none;
+    display: inline-block;
 }
 
-.profileTab ul.about li h1
+.profileTab ul.about p h1
 {
     padding-top: 3em;
     font-size: 2.5em;
 }
 
-.profileTab ul.about li h2
+.profileTab ul.about p h2
 {
     font-size: 1.3em;
 }
 
-.profileTab ul.about li h3
+.profileTab ul.about p h3
 {
     padding-top: 1em;
     font-size: 1.3em;
-} 
+} */
 
 .networkTab
 {
     width: 400px;
-    height: 80px;
-    user-select: none;
+    height: 7%;
 }
 
 .networkTab ul.tab 
 {
-    position: relative;
-    inset: 0;
-    background: #fff;
-    border-radius: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap:13%;
+    justify-content: center;
 }
 
-.networkTab ul.tab li
+.networkTab ul.tab li /*ícones*/
 {
     list-style: none;
     cursor: pointer;
@@ -94,11 +144,10 @@ body
 {
     font-size: 1.8em;
     color: #bbb;
-    pointer-events: none;
-    transition: 0.1s;
 }
 
 .networkTab ul.tab li:hover ion-icon
 {
     color: #2196f3;
+    transition: 0.2s;
 }
