@@ -16,7 +16,7 @@ const ball = {
   y: canvas.height / 2,
   radius: 10,
   speedX: 5,
-  speedY: 5
+  speedY: 5 
 };
 
 // Handle user input
