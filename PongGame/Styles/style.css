@@ -1,0 +1,82 @@
+*,*::before,*::after
+{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background: #003f0e;
+    overflow: hidden;
+}
+
+.UI,
+.playerScore,
+.pcScore
+{
+    position: absolute;
+    display: inline-block;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.UI
+{
+    width: 100vw;
+}
+
+.playerScore
+{
+    right: 52vw;
+}
+
+.pcScore
+{
+    left: 52vw;
+}
+
+.centerLine
+{
+    position: absolute;
+    left: 50vw;
+    height: 100vh;
+    width: 1vh;
+    transform: translateX(-50%);
+    background: #FFF;
+}
+
+.paddle
+{
+    --position: 50;
+
+    position: absolute;
+    background:#FFF;
+    top: calc(var(--position) * 1vh);
+    transform: translateY(-50%);
+    width: 1vh;
+    height: 10vh;
+}
+
+.paddle.left
+{
+    left: 1vw;
+}
+
+.paddle.right
+{
+    right: 1vw;
+}
+
+.ball
+{
+    --positionX: 50;
+    --positionY: 50;
+    position: absolute;
+    left: calc(var(--positionX) * 1vw);
+    top: calc(var(--positionY) * 1vh);
+    transform: translateY(-50%) translateX(-50%);
+    width: 2.5vh;
+    height: 2.5vh;
+    border-radius: 50%;
+    background: #FFF;
+}
