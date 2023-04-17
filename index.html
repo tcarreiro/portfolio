@@ -17,33 +17,94 @@
         <nav class="navbar">
             <a href="#home" class="active">Home</a>
             <a href="#about">About</a>
-            <a href="#services">Services</a>
             <a href="#portfolio">Portfolio</a>
             <a href="#contact">Contact</a>
-            
+
         </nav>
     </header>
 
-    <!-- home section design -->
+    <!-- home -->
     <section class="home" id="home">
-        <div class="home-img">
-            <img src="Imgs/TCLogo.png">
-        </div>
         <div class="home-content">
             <h1>Thiago Carreiro</h1>
-            <h3>And I'm a <span>Junior Frontend Developer</span></h3>
-            <p>Over the years, I've become skilled in a variety of programming languages, including HTML, CSS, JavaScript and PHP. While my focus is on frontend development, I also have experience with C, C#, C++ and Java. I've been coding since I was 10, and it's always been a hobby and passion of mine.
-                I'm excited to pursue a career in frontend development and continue to learn and grow as a developer.</p>
+            <h3><span>Junior Frontend Developer</span></h3>
+            <p>Personal page with informations, portfolio and contact.
+            </p>
             <div class="social-media">
-                    <a href="https://www.linkedin.com/in/thiago-carreiro-41ba9753/" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a>
-                    <a href="https://www.instagram.com/carreiro.thiago/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="https://www.facebook.com/thiago.carreiro" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a href="https://github.com/tcarreiro" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
+                <a href="https://www.linkedin.com/in/thiago-carreiro-41ba9753/" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a>
+                <a href="https://www.instagram.com/carreiro.thiago/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="https://www.facebook.com/thiago.carreiro" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="https://github.com/tcarreiro" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
             </div>
             <a href="#" class="btn">Download my CV</a>
         </div>
+        <div class="home-img">
+            <img src="Imgs/TCLogo.png">
+        </div>
     </section>
     
+    <!-- about -->
+    <section class="about" id="about">
+        
+        <div class="about-img">
+            <img src="Imgs/profile.png">
+        </div>
+        <div class="about-content">
+            <h2 class="heading">About <span>Me</span></h2>
+            <h1>Thiago Carreiro</h1>
+            <h3>And I'm a <span>Junior Frontend Developer</span></h3>
+            <p>Hi there! My name is Thiago Carreiro. I have a degree in Chemical Engineering and worked in the field for 7 years, but I felt that my true calling was in web development. So, I took a leap of faith and decided to study coding full-time.
+               Over the years, I've become skilled in a variety of programming languages, including HTML, CSS, JavaScript and PHP. While my focus is on frontend development, I also have experience with C, C#, C++ and Java. I've been coding since I was 10, and it's always been a hobby and passion of mine.
+               I'm excited to pursue a career in frontend development and continue to learn and grow as a developer.
+            </p>
+            <a href="#about" class="btn">Read more</a>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="heading">Latest <span>Projects</span></h2>
+        
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+                <img src="Imgs/portfolio/PongGame.png">
+                <div class="portfolio-desc">
+                    <h4>Web Browser Pong Game</h4>
+                    <p>A web browser version of pong game made with CSS animation and JavaScript.</p>
+                    <a href="https://tcarreiro.github.io/PongGame/" target="_blank"><ion-icon name="link-outline"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+
+        <a href="#portfolio" class="btn">More projects</a>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>me</span></h2>
+
+        <form action="#contact">
+            <div class="input-box">
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email Address">
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number">
+                <input type="text" placeholder="Email Subject">
+            </div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Enter message..."></textarea>
+            <input type="submit" value="Send" class="btn">
+        </form>
+    </section>
+        
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Thiago Carreiro | All Rights Reserved</p>
+        </div>
+        <a href="#home"><ion-icon name="arrow-up-circle-outline"></ion-icon></a>
+    </footer>
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
