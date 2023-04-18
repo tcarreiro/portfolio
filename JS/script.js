@@ -41,35 +41,24 @@ window.onscroll = () => {
                 links.classList.remove('active');
                 document.querySelector('header nav a[href*=' + id +']').classList.add('active');
             });
-            let activeLink = document.querySelector('header nav a[href*=' + id +']');
-            attHighlight(activeLink);
         };
     });
 
     /* ======================= toggle icon ======================= */
     menuIcon.classList.remove('bx-x');
     navbar.classList.remove('active');
-
 };
 
-window.addEventListener("resize", function() {
-
-    sections.forEach(sec => {
-        let top = window.scrollY;
-        let offset = sec.offsetTop - 150;
-        let height = sec.offsetHeight;
-        let id = sec.getAttribute('id');
-
-        if (top >= offset && top < offset + height) {
-            navLinks.forEach(links => {
-                links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id +']').classList.add('active');
-            });
-            let activeLink = document.querySelector('header nav a[href*=' + id +']');
-            attHighlight(activeLink);
+function updateHighlight() {
+    navLinks.forEach(link => {
+        if (link.classList.contains('active')) {
+            attHighlight(link);
         };
     });
-});
+    window.requestAnimationFrame(updateHighlight);
+};
+
+window.requestAnimationFrame(updateHighlight);
 
 /* ======================= scroll ======================= */
 
