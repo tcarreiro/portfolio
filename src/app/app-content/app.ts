@@ -19,12 +19,10 @@ import { CommonModule } from "@angular/common";
 })
 export class App implements OnInit, OnDestroy {
   title = signal("AngularTest");
-  contentType = signal("Home");
 
   private eventListener: ((event: CustomEvent) => void) | undefined;
   private renderedComponent: ComponentRef<Component> | null = null;
   private elementRef = inject(ElementRef);
-  private viewContainerRef = inject(ViewContainerRef);
 
   ngOnInit(): void {
     this.eventListener = (event: CustomEvent) => {
@@ -41,7 +39,6 @@ export class App implements OnInit, OnDestroy {
   }
 
   loadContent(type: string): void {
-    this.contentType.set(type);
     this.clearContent();
 
     switch (type) {
@@ -61,15 +58,27 @@ export class App implements OnInit, OnDestroy {
 
   private loadLandingPage() {
     import("./features/landing-page/landing-page").then((module) => {
-      this.clearContent();
-      this.renderedComponent = this.viewContainerRef.createComponent(module.LandingPageComponent);
+      const container = this.elementRef.nativeElement.querySelector(".content");
+      if (container) {
+        // this.renderedComponent = this.viewContainerRef.createComponent(module.LandingPageComponent);
+        container.appendChild(document.createElement("LandingPageComponent"));
+      }
     });
   }
 
   private loadFrontService(url: string, nome: string) {
-    // Remove script anterior
     const oldScript = document.getElementById(`microfrontend-${nome}`);
     if (oldScript) oldScript.remove();
+
+    const oldCss = document.getElementById(`microfrontend-css-${nome}`);
+    if (oldCss) oldCss.remove();
+
+    const cssUrl = url.replace(".js", ".css");
+    const link = document.createElement("link");
+    link.id = `microfrontend-css-${nome}`;
+    link.rel = "stylesheet";
+    link.href = cssUrl;
+    document.head.appendChild(link);
 
     const script = document.createElement("script");
     script.id = `microfrontend-${nome}`;
@@ -77,7 +86,6 @@ export class App implements OnInit, OnDestroy {
     script.type = "module";
 
     script.onload = () => {
-      console.log(`Script ${nome} carregado`);
       this.renderWebComponent(nome);
     };
 
@@ -85,7 +93,6 @@ export class App implements OnInit, OnDestroy {
   }
 
   private renderWebComponent(nome: string) {
-    this.clearContent();
     const container = this.elementRef.nativeElement.querySelector(".content");
     if (container) {
       const webComponent = document.createElement(`app-${nome.toLowerCase()}`);
@@ -104,8 +111,10 @@ export class App implements OnInit, OnDestroy {
       container.innerHTML = "";
     }
 
-    // Remove o script do VueTest se existir
-    const oldScript = document.getElementById(`microfrontend-script-module`);
-    if (oldScript) oldScript.remove();
+    const scripts = document.querySelectorAll('script[id^="microfrontend-"]');
+    scripts.forEach((script) => script.remove());
+
+    const styles = document.querySelectorAll('link[id^="microfrontend-css-"]');
+    styles.forEach((style) => style.remove());
   }
 }
