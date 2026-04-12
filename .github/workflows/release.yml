@@ -1,0 +1,118 @@
+name: Release Management
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - name: Get PR branch name
+        id: pr-branch
+        run: |
+          PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+          echo "PR_BRANCH=$PR_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Extract version from branch name
+        id: version
+        run: |
+          BRANCH="${{ steps.pr-branch.outputs.PR_BRANCH }}"
+
+          if [[ $BRANCH =~ ^release/([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+            TYPE="release"
+          elif [[ $BRANCH =~ ^hotfix/([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            VERSION="${BASH_REMATCH[1]}"
+            TYPE="hotfix"
+          else
+            echo "Branch não é release ou hotfix. Nenhuma ação será executada."
+            exit 0
+          fi
+
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "TYPE=$TYPE" >> $GITHUB_OUTPUT
+
+      - name: Update package.json version
+        if: steps.version.outputs.VERSION != ''
+        run: |
+          npm version ${{ steps.version.outputs.VERSION }} --no-git-tag-version
+
+      - name: Commit package.json update
+        if: steps.version.outputs.VERSION != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to ${{ steps.version.outputs.VERSION }}"
+          git push origin master
+
+      - name: Create tag
+        if: steps.version.outputs.VERSION != ''
+        run: |
+          git tag v${{ steps.version.outputs.VERSION }}
+          git push origin v${{ steps.version.outputs.VERSION }}
+
+      - name: Setup Node.js
+        if: steps.version.outputs.VERSION != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.version.outputs.VERSION != ''
+        run: npm ci
+
+      - name: Build Angular
+        if: steps.version.outputs.VERSION != ''
+        run: npm run build -- --configuration production
+
+      - name: Setup Pages
+        if: steps.version.outputs.VERSION != ''
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        if: steps.version.outputs.VERSION != ''
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist/angular-test'
+
+      - name: Deploy to GitHub Pages
+        if: steps.version.outputs.VERSION != ''
+        uses: actions/deploy-pages@v4
+
+      - name: Create GitHub Release
+        if: steps.version.outputs.VERSION != ''
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.VERSION }}
+          name: Release v${{ steps.version.outputs.VERSION }}
+          body: |
+            ## 🚀 Release v${{ steps.version.outputs.VERSION }}
+
+            ### Tipo: ${{ steps.version.outputs.TYPE }}
+
+            ### 📦 Principais mudanças:
+            - PR: #${{ github.event.pull_request.number }}
+            - Autor: ${{ github.event.pull_request.user.login }}
+
+            ### 🔗 Links
+            - [Ver release no GitHub](https://github.com/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.VERSION }})
+          draft: false
+          prerelease: false
