@@ -1,0 +1,9 @@
+<nav class="main-navigation-menu">
+  @for (item of menuItems(); track $index) {
+    @if (item.isClickable) {
+      <button (click)="navigateTo(item.host, item.route)">{{item.title}}</button>
+    } @else {
+      <span class="menu-group-title">{{ item.title }}</span>
+    }
+  }
+</nav>
