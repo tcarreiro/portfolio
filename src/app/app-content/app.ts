@@ -23,6 +23,7 @@ export class App implements OnInit, OnDestroy {
   private eventListener: ((event: CustomEvent) => void) | undefined;
   private renderedComponent: ComponentRef<Component> | null = null;
   private elementRef = inject(ElementRef);
+  private viewContainerRef = inject(ViewContainerRef);
 
   ngOnInit(): void {
     this.eventListener = (event: CustomEvent) => {
@@ -60,8 +61,10 @@ export class App implements OnInit, OnDestroy {
     import("./features/landing-page/landing-page").then((module) => {
       const container = this.elementRef.nativeElement.querySelector(".content");
       if (container) {
-        // this.renderedComponent = this.viewContainerRef.createComponent(module.LandingPageComponent);
-        container.appendChild(document.createElement("LandingPageComponent"));
+        container.innerHTML = "";
+        this.renderedComponent = this.viewContainerRef.createComponent(module.LandingPageComponent);
+        const element = this.renderedComponent.location.nativeElement;
+        container.appendChild(element);
       }
     });
   }

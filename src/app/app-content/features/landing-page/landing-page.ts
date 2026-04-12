@@ -6,7 +6,6 @@ import { RouterOutlet } from "@angular/router";
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: "./landing-page.html",
-  styleUrl: "./landing-page.css",
 })
 export class LandingPageComponent {
 
