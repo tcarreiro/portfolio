@@ -117,7 +117,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Create GitHub Release
-        if: steps.version.outputs.VERSION != ''
+        if: steps.version.outputs.VERSION != '' && success()
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.version.outputs.VERSION }}
