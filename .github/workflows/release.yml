@@ -110,7 +110,7 @@ jobs:
         if: steps.version.outputs.VERSION != ''
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/angular-test'
+          path: './dist/PortfolioPortal'
 
       - name: Deploy to GitHub Pages
         if: steps.version.outputs.VERSION != ''

@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "AngularTest": {
+    "PortfolioPortal": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "AngularTest:build:production"
+              "buildTarget": "PortfolioPortal:build:production"
             },
             "development": {
-              "buildTarget": "AngularTest:build:development"
+              "buildTarget": "PortfolioPortal:build:development"
             }
           },
           "defaultConfiguration": "development"
