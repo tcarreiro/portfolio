@@ -47,7 +47,7 @@ export class App implements OnInit, OnDestroy {
         this.loadLandingPage();
         break;
       case "VueTest":
-        this.loadFrontService("http://localhost:5173/main.js", "module");
+        this.loadFrontService("https://tcarreiro.github.com/vuePage/main.js", "module");
         break;
       case "servico2":
         this.loadFrontService("http://localhost:4204/main.js", "servico2");
