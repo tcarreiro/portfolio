@@ -1,0 +1,63 @@
+<header class="wrapper mt-1">
+  <div class="upper-section">
+    <svg width="120" height="130" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4f46e5"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Shield -->
+      <path d="M120 40
+           L200 60
+           V120
+           C200 170 160 210 120 230
+           C80 210 40 170 40 120
+           V60 Z"
+            fill="#0f172a"
+            stroke="url(#grad)"
+            stroke-width="6"
+            stroke-linejoin="round"/>
+
+      <!-- Left bracket -->
+      <path d="M75 90 L55 120 L75 150"
+            stroke="url(#grad)"
+            stroke-width="6"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+      <!-- Right bracket -->
+      <path d="M165 90 L185 120 L165 150"
+            stroke="url(#grad)"
+            stroke-width="6"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+
+      <!-- Stylized T -->
+      <path d="M85 95 H125 M105 95 V145"
+            stroke="white"
+            stroke-width="9"
+            stroke-linecap="round"/>
+
+      <!-- Stylized C (right side, open) -->
+      <path d="M155 100
+           A25 25 0 1 0 155 140"
+            stroke="white"
+            stroke-width="9"
+            fill="none"
+            stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="lower-section">
+    <app-navigation></app-navigation>
+  </div>
+</header>
+
+<style>
+  .wrapper {
+  }
+
+</style>

@@ -14,7 +14,7 @@ import { CommonModule } from "@angular/common";
   selector: "app-content",
   imports: [CommonModule],
   templateUrl: "./app.html",
-  styleUrls: ["../../styles.css"],
+  styleUrls: ["../../../styles.css"],
   standalone: true,
 })
 export class App implements OnInit, OnDestroy {
@@ -27,8 +27,8 @@ export class App implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.eventListener = (event: CustomEvent) => {
-      const { type } = event.detail;
-      this.loadContent(type);
+      const { host, route } = event.detail;
+      this.loadContent(route, host);
     };
 
     window.addEventListener("navigate-event", this.eventListener as EventListener);
@@ -39,25 +39,13 @@ export class App implements OnInit, OnDestroy {
     window.removeEventListener("navigate-event", this.eventListener as EventListener);
   }
 
-  loadContent(type: string): void {
+  loadContent(route: string, host: string|null = null): void {
     this.clearContent();
-
-    switch (type) {
-      case "home":
-        this.loadLandingPage();
-        break;
-      case "VueTest":
-        this.loadFrontService("https://tcarreiro.github.io/vuepage/main.js", "module");
-        break;
-      case "servico2":
-        this.loadFrontService("http://localhost:4204/main.js", "servico2");
-        break;
-      default:
-        this.loadLandingPage();
-    }
+    if (!host) this.loadLocalPage();
+    else this.loadFrontService(`${host}/${route}/main.js`, "module");
   }
 
-  private loadLandingPage() {
+  private loadLocalPage() {
     import("./features/landing-page/landing-page").then((module) => {
       const container = this.elementRef.nativeElement.querySelector(".content");
       if (container) {
