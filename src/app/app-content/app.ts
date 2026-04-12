@@ -18,7 +18,7 @@ import { CommonModule } from "@angular/common";
   standalone: true,
 })
 export class App implements OnInit, OnDestroy {
-  title = signal("AngularTest");
+  title = signal("PortfolioPortal");
 
   private eventListener: ((event: CustomEvent) => void) | undefined;
   private renderedComponent: ComponentRef<Component> | null = null;
