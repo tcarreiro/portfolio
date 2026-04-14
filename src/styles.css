@@ -9,6 +9,7 @@
   --orange-red: oklch(63.32% 0.24 31.68);
 
   --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-800: oklch(24.48% 0.009 301.01);
   --gray-700: oklch(36.98% 0.014 302.71);
   --gray-400: oklch(70.9% 0.015 304.04);
 
@@ -37,12 +38,11 @@
   display: block;
   height: 100dvh;
 }
-* {
 
-}
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--gray-800);
 }
 
 app-header,
@@ -61,6 +61,7 @@ app-content {
   & > main > .content {
     display: flex;
     max-width: 1170px;
+    min-height: 70vh;
   }
 }
 

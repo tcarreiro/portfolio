@@ -1,14 +1,6 @@
-import {
-  Component,
-  ComponentRef,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  signal,
-  ViewContainerRef,
-  inject,
-} from "@angular/core";
+import { Component, ComponentRef, ElementRef, signal, ViewContainerRef, inject, effect, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { NavigationService } from "../../shared/hooks/navigation.service";
 
 @Component({
   selector: "app-content",
@@ -17,32 +9,28 @@ import { CommonModule } from "@angular/common";
   styleUrls: ["../../../styles.css"],
   standalone: true,
 })
-export class App implements OnInit, OnDestroy {
+export class App implements OnInit {
+  protected navigationService = inject(NavigationService);
   title = signal("PortfolioPortal");
 
-  private eventListener: ((event: CustomEvent) => void) | undefined;
   private renderedComponent: ComponentRef<Component> | null = null;
   private elementRef = inject(ElementRef);
   private viewContainerRef = inject(ViewContainerRef);
 
+  constructor() {
+    effect(() => {
+      const currentPage = this.navigationService.page();
+      this.loadContent(currentPage);
+    });
+  }
   ngOnInit(): void {
-    this.eventListener = (event: CustomEvent) => {
-      const { host, route } = event.detail;
-      this.loadContent(route, host);
-    };
-
-    window.addEventListener("navigate-event", this.eventListener as EventListener);
-
-    this.loadContent("home");
-  }
-  ngOnDestroy() {
-    window.removeEventListener("navigate-event", this.eventListener as EventListener);
+    this.navigationService.navigateTo("home", "");
   }
 
-  loadContent(route: string, host: string|null = null): void {
+  loadContent(currentPage: string): void {
     this.clearContent();
-    if (!host) this.loadLocalPage();
-    else this.loadFrontService(`${host}/${route}/main.js`, "module");
+    if (this.navigationService.localPage()) this.loadLocalPage();
+    else this.loadFrontService(`${currentPage}/main.js`, "module");
   }
 
   private loadLocalPage() {
@@ -58,23 +46,26 @@ export class App implements OnInit, OnDestroy {
   }
 
   private loadFrontService(url: string, nome: string) {
-    const oldScript = document.getElementById(`microfrontend-${nome}`);
+    const scriptName = `microfrontend-${nome}`;
+    const cssName = `microfrontend-css-${nome}`;
+
+    const oldScript = document.getElementById(scriptName);
     if (oldScript) oldScript.remove();
 
-    const oldCss = document.getElementById(`microfrontend-css-${nome}`);
+    const script = document.createElement("script");
+    script.id = scriptName;
+    script.src = url;
+    script.type = "module";
+
+    const oldCss = document.getElementById(cssName);
     if (oldCss) oldCss.remove();
 
     const cssUrl = url.replace(".js", ".css");
     const link = document.createElement("link");
-    link.id = `microfrontend-css-${nome}`;
+    link.id = cssName;
     link.rel = "stylesheet";
     link.href = cssUrl;
     document.head.appendChild(link);
-
-    const script = document.createElement("script");
-    script.id = `microfrontend-${nome}`;
-    script.src = url;
-    script.type = "module";
 
     script.onload = () => {
       this.renderWebComponent(nome);

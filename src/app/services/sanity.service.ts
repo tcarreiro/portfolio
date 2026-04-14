@@ -11,6 +11,7 @@ export interface MenuItem {
   parent?: {
     _ref: string;
   };
+  children: string[];
 }
 
 @Injectable({
@@ -36,41 +37,27 @@ export class SanityService {
       actionType,
       route,
       host,
-      parent
+      parent,
+      children,
     }`;
 
-    return await this.client.fetch(query);
+    const promise = await this.client.fetch(query);
+    return this.mountChildren(promise);
   }
 
-  buildMenuTree(items: MenuItem[]): MenuItemTreeNode[] {
-    const itemMap: Map<string, MenuItemTreeNode> = new Map();
-    const roots: MenuItemTreeNode[] = [];
-
+  mountChildren(items: MenuItem[]) {
     for (const item of items) {
-      itemMap.set(item._id, { ...item, children: [] });
+      item.children = [];
     }
-
     for (const item of items) {
-      const node: MenuItemTreeNode = itemMap.get(item._id) as MenuItemTreeNode;
-
-      if (item.parent?._ref) {
-        const parent: MenuItemTreeNode | undefined = itemMap.get(item.parent._ref);
-
+      if (item.parent) {
+        const parent = items.find(it => it._id === item.parent?._ref);
         if (parent) {
-          parent.children = parent.children || [];
-          parent.children.push(node);
-        } else {
-          roots.push(node);
+          parent.children.push(item._id);
         }
-      } else {
-        roots.push(node);
       }
     }
-
-    return roots;
+    return items;
   }
-}
 
-interface MenuItemTreeNode extends MenuItem {
-  children: MenuItemTreeNode[];
 }

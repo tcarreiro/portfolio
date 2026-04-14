@@ -1,5 +1,5 @@
-<header class="wrapper mt-1">
-  <div class="upper-section">
+<header class="header-wrapper ">
+  <div class="upper-section w-full justify-content-between">
     <svg width="120" height="130" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -51,13 +51,7 @@
             stroke-linecap="round"/>
     </svg>
   </div>
-  <div class="lower-section">
-    <app-navigation></app-navigation>
+  <div class="lower-section hidden md:flex ">
+    <app-navigation class="w-full"></app-navigation>
   </div>
 </header>
-
-<style>
-  .wrapper {
-  }
-
-</style>

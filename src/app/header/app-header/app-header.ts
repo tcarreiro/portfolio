@@ -5,7 +5,7 @@ import { Navigation } from "./features/navigation/navigation";
   selector: "app-header",
   imports: [Navigation],
   templateUrl: "./app-header.html",
-  styleUrls: ["../../../styles.css"],
+  styleUrls: ["../../../styles.css", "./app-header.css"],
   standalone: true,
 })
 export class AppHeader {
