@@ -1,0 +1,13 @@
+<button
+  [id]="`mbutton-${elementUUID}`"
+  [class]="[buttonClass,  type, group]"
+  [disabled]="disabled"
+  (click)="handleClick()"
+  (mouseenter)="handleMouseEnter()"
+  (mouseleave)="handleMouseLeave()"
+>
+  <span [class]="['mlabel', labelClass]">{{label}}</span>
+  @if (icon) {
+    <i [class]="icon"></i>
+  }
+</button>

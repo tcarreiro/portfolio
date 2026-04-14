@@ -1,0 +1,110 @@
+:host {
+  cursor: pointer;
+  --border-color: transparent;
+
+
+  .brand {
+    --normal-font-color: #fff;
+    --faded-font-color: #ddd;
+    --normal-bg-color: #1a7ee6;
+    --faded-bg-color: #4f92e3;
+  }
+
+  .destructive {
+    --normal-font-color: #fff;
+    --faded-font-color: #ddd;
+    --normal-bg-color: #cd0000;
+    --faded-bg-color: #bd3232;
+  }
+
+  .neutral {
+    --normal-font-color: #fff;
+    --faded-font-color: #ddd;
+    --normal-bg-color: var(--gray-900);
+    --faded-bg-color: var(--gray-400);
+  }
+
+  .clear {
+    --normal-font-color: var(--gray-900);
+    --faded-font-color: var(--gray-400);
+    --normal-bg-color: #fff;
+    --faded-bg-color: #ddd;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+
+    >i{
+      padding: 0.25rem;
+    }
+
+    >.mlabel {
+      background: transparent;
+    }
+
+    &.primary {
+      --font-color: var(--normal-font-color);
+      &:hover {
+        --font-hover-color: var(--faded-font-color);
+      }
+    }
+
+    &.secondary {
+      --font-color: var(--normal-bg-color);
+      &:hover {
+        --font-hover-color: var(--faded-bg-color);
+      }
+    }
+
+    &.tertiary {
+      --font-color: var(--normal-bg-color);
+      &:hover {
+        --font-hover-color: var(--faded-bg-color);
+      }
+    }
+
+    color: var(--font-color);
+    &:hover {
+      color: var(--font-hover-color);
+    }
+
+  }
+
+  .primary {
+    --background-color: var(--normal-bg-color);
+    --border-color: var(--normal-bg-color);
+    &:hover {
+      --background-hover-color: var(--faded-bg-color);
+    }
+  }
+
+  .secondary {
+    --background-color: transparent;
+    --border-color: var(--normal-bg-color);
+    &:hover {
+      --background-hover-color: calc(var(--faded-bg-color) * rgba(1,1,1,0.8));
+    }
+  }
+
+  .tertiary {
+    --background-color: transparent;
+    --border-color: transparent;
+    &:hover {
+      --background-hover-color: transparent;
+    }
+  }
+
+  background: var(--background-color);
+  :hover{
+    background: var(--background-hover-color);
+  }
+
+  border:1px solid var(--border-color);
+
+}
+
+/*}*/
