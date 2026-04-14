@@ -1,0 +1,57 @@
+<nav class="main-navigation-menu flex gap-2">
+  @for (item of getRoots(); track $index) {
+    @let hasChildren = item.children.length > 0;
+    @let iconPath = !hasChildren ? "" : ($index === activeItemIndex() ? "bi bi-chevron-up" : "bi bi-chevron-down");
+    <mbutton
+      [label]="item.title"
+      type="tertiary"
+      group="clear"
+      buttonClass="py-2"
+      labelClass="text-lg"
+      [icon]="iconPath"
+      (onClick)="handleMouseClick(item, $index)"
+    />
+  }
+</nav>
+
+<div [class]="['submenu', activeItemIndex() < 0 ? 'hidden' : '']" style="">
+    <div class="list">
+      @for (child of getChildren(activeItem()!); track $index) {
+        <li (click)="handleMouseClick(child, $index)">
+          <mbutton
+            [label]="child.title"
+            type="tertiary"
+            group="clear"
+            labelClass=""
+          />
+        </li>
+      }
+    </div>
+</div>
+
+<style>
+  :host{
+    .submenu {
+      position: relative;
+
+      .list {
+        position: absolute;
+        min-width: 100%;
+        max-height: 70vh;
+        background: var(--gray-800);
+        border: 1px solid var(--gray-400);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        z-index:10;
+
+        li {
+          list-style: none;
+          cursor: pointer;
+          &:hover {
+            background: var(--gray-700);
+          }
+        }
+      }
+    }
+  }
+</style>
