@@ -33,8 +33,6 @@
               "optimization": true,
               "sourceMap": false,
               "namedChunks": false,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
